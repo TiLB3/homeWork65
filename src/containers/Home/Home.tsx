@@ -9,10 +9,10 @@ const Home = () => {
   const {pageName} = useParams();
   const [isLoading, setIsLoading] = useState(false);
 
-  const fetchPage = useCallback(async (pageName?: string) => {
+  const fetchPage = useCallback(async (pageNameParams?: string) => {
     try {
       setIsLoading(true);
-      const {data: response} = await axiosApi<Page>(pageName ? `/pages/${pageName}.json` : "/pages/home.json");
+      const {data: response} = await axiosApi<Page>(pageNameParams ? `/pages/${pageNameParams}.json` : "/pages/home.json");
       if (response) {
         setPage(response);
       }
@@ -25,13 +25,12 @@ const Home = () => {
 
 
   useEffect(() => {
-
     if (pageName) {
       void fetchPage(pageName);
     } else {
       void fetchPage();
     }
-  }, [fetchPage, pageName]);
+  }, [fetchPage,pageName]);
 
   return (
     <div>

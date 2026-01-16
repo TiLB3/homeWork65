@@ -3,6 +3,12 @@ export interface Page {
   content: string;
 }
 
+export interface PageMutation {
+  title: string;
+  content: string;
+  pageName: string;
+}
+
 export interface PageApi {
-  [key: string]: PageMutation;
+  [key: string]: Page;
 }
