@@ -45,7 +45,7 @@ const EditPage = () => {
       return;
     }
     setIsLoading(true);
-    await editPage(form);
+    await editPage({title: form.title, content: form.content});
     setForm({title: '', content: "", pageName: ""});
     setIsLoading(false);
 
