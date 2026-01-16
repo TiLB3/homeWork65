@@ -2,7 +2,7 @@ import {useParams} from "react-router-dom";
 import {useCallback, useEffect, useState} from "react";
 import axiosApi from "../../AxiosApi.ts";
 import type {Page} from "../../types";
-import Spinner from "../../components/UI/Spinner/Spinner.tsx";
+import PageDisplay from "../../components/PageDisplay/PageDisplay.tsx";
 
 const Home = () => {
   const [page, setPage] = useState<Page | null>(null);
@@ -12,7 +12,6 @@ const Home = () => {
   const fetchPage = useCallback(async (pageName?: string) => {
     try {
       setIsLoading(true);
-      console.log(pageName)
       const {data: response} = await axiosApi<Page>(pageName ? `/pages/${pageName}.json` : "/pages/home.json");
       if (response) {
         setPage(response);
@@ -36,10 +35,7 @@ const Home = () => {
 
   return (
     <div>
-
-
-      <Spinner isLoading={isLoading} />
-      {page?.title}
+      {page && <PageDisplay title={page.title} content={page.content} isLoading={isLoading} />}
     </div>
   );
 };
